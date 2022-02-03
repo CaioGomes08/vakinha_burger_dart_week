@@ -1,16 +1,25 @@
 import 'package:flutter/src/widgets/navigator.dart';
 import 'package:get/get.dart';
 import 'package:vakinha_burger/app/core/services/auth_service.dart';
+import 'package:vakinha_burger/app/core/services/shopping_cart_service.dart';
 import 'package:vakinha_burger/app/modules/menu/menu_bindings.dart';
 import 'package:vakinha_burger/app/modules/menu/menu_page.dart';
 
 class HomeController extends GetxController {
   static const NAVIGATOR_KEY = 1;
 
+  final ShoppingCartService _shoppingCartService;
+
+  HomeController({
+    required ShoppingCartService shoppingCartService,
+  }) : _shoppingCartService = shoppingCartService;
+
   final _tabIndex = 0.obs;
   final _tabs = ['/menu', '/order/shopping_cart', '/exit'];
 
   int get tabIndex => _tabIndex.value;
+
+  int get totalProductsInShoppingCart => _shoppingCartService.totalProducts;
 
   set tabIndex(int index) {
     _tabIndex(index);

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class ProductModel {
   int id;
+
   String name;
   String description;
   double price;
