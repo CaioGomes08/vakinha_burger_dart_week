@@ -4,6 +4,8 @@ import 'package:vakinha_burger/app/core/services/auth_service.dart';
 import 'package:vakinha_burger/app/core/services/shopping_cart_service.dart';
 import 'package:vakinha_burger/app/modules/menu/menu_bindings.dart';
 import 'package:vakinha_burger/app/modules/menu/menu_page.dart';
+import 'package:vakinha_burger/app/modules/order/shopping_cart/shopping_cart_bindings.dart';
+import 'package:vakinha_burger/app/modules/order/shopping_cart/shopping_cart_page.dart';
 
 class HomeController extends GetxController {
   static const NAVIGATOR_KEY = 1;
@@ -39,6 +41,13 @@ class HomeController extends GetxController {
         transition: Transition.fadeIn,
       );
     }
-    if (settings.name == '/order/shopping_cart') {}
+    if (settings.name == '/order/shopping_cart') {
+      return GetPageRoute(
+        settings: settings,
+        page: () => ShoppingCartPage(),
+        binding: ShoppingCartBindings(),
+        transition: Transition.fadeIn,
+      );
+    }
   }
 }

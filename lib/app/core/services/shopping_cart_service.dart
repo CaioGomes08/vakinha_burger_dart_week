@@ -5,11 +5,19 @@ import 'package:vakinha_burger/app/models/shopping_cart_model.dart';
 class ShoppingCartService extends GetxService {
   final _shoppingCart = <int, ShoppingCartModel>{}.obs;
 
-  List<ShoppingCartModel> get product => _shoppingCart.values.toList();
+  List<ShoppingCartModel> get products => _shoppingCart.values.toList();
 
   int get totalProducts => _shoppingCart.values.length;
 
   ShoppingCartModel? getById(int id) => _shoppingCart[id];
+
+  double get totalValue {
+    return _shoppingCart.values.fold(0, (totalValue, shoppingCartModel) {
+      totalValue +=
+          shoppingCartModel.product.price * shoppingCartModel.quantity;
+      return totalValue;
+    });
+  }
 
   void addAndRemoveProductInShoppingCart(ProductModel product,
       {required int quantity}) {
@@ -23,5 +31,9 @@ class ShoppingCartService extends GetxService {
         return ShoppingCartModel(quantity: quantity, product: product);
       });
     }
+  }
+
+  void clear() {
+    _shoppingCart.clear();
   }
 }
